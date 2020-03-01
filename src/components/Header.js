@@ -3,34 +3,41 @@ import {
     StyleSheet,
     View,
     Text,
+    SafeAreaView,
+    TouchableOpacity,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { w } from '../constants/constants';
 
-const Header = ({ title }) => {
-    const { container, text } = s
+const Header = ({ title, detail, onPress, leftIcon, leftColor }) => {
+    const { container, text, leftButtonStyle } = s
     return (
         <View style={container}>
-            <Text style={text}>{title}</Text>
+            <TouchableOpacity onPress={onPress}>
+                <Ionicons name={leftIcon} style={[leftButtonStyle, { paddingLeft: detail ? 10 : 20 }]} color={leftColor} size={40} />
+            </TouchableOpacity>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={[text, { paddingLeft: leftIcon ? 10 : 0 }]}>{title}</Text>
         </View>
     );
 };
-
 const s = StyleSheet.create({
     container: {
+        flexDirection: 'row',
         backgroundColor: '#30d0fe',
         height: 116,
-        justifyContent: 'center',
         paddingLeft: 22,
         paddingTop: 71,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.4,
-        elevation: 2,
+        elevation: 10,
         position: 'relative'
     },
     text: {
         color: '#fff',
+        width: w - 70,
         fontSize: 28,
         fontFamily: 'AvenirNext-DemiBold'
+    },
+    leftButtonStyle: {
+        paddingRight: 10
     }
 });
 

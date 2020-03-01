@@ -4,18 +4,21 @@ import {
     View,
     Text,
     Image,
+    TouchableOpacity,
 } from 'react-native';
 import { h, w } from './../constants/constants'
 
-const ImageCard = ({ data }) => {
-    console.log(data)
+const ImageCard = ({ data, onPress }) => {
     const { cover, text, container } = s
     const { image, name } = data;
+    const img = `https${image.medium.slice(4)}`
     return (
-        <View style={container}>
-            <Image style={cover} source={{ uri: image }} />
-            <Text style={text}>{name.toUpperCase()}</Text>
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={container}>
+                <Image style={cover} source={{ uri: img }} />
+                <Text style={text}>{name.toUpperCase()}</Text>
+            </View>
+        </TouchableOpacity>
     );
 };
 
@@ -36,7 +39,7 @@ const s = StyleSheet.create({
     container: {
         width: w / 2.4,
         paddingVertical: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'transparent'
     }
 });
 
